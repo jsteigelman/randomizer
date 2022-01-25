@@ -5,16 +5,12 @@ class RandomizerApp extends React.Component {
     this.handleRandomItem = this.handleRandomItem.bind(this)
     this.handleAddItem = this.handleAddItem.bind(this)
     this.state = {
-      options: props.options
+      options: props.options,
     }
   }
 
   handleDeleteItems() {
-    this.setState(() => {
-      return {
-        options: [],
-      }
-    })
+    this.setState(() => ({ options: [] }))
   }
 
   handleRandomItem() {
@@ -32,11 +28,9 @@ class RandomizerApp extends React.Component {
       return 'Please enter a unique value (this is a duplicate entry).'
     }
 
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat(item), // concat instead of push, because don't want to change original array
-      }
-    })
+    this.setState((prevState) => ({
+      options: prevState.options.concat(item), // concat instead of push, because don't want to change original array
+    }))
   }
 
   render() {
@@ -61,7 +55,7 @@ class RandomizerApp extends React.Component {
 }
 
 RandomizerApp.defaultProps = {
-  options: []
+  options: [],
 }
 
 const Header = (props) => {
@@ -74,16 +68,13 @@ const Header = (props) => {
 }
 
 Header.defaultProps = {
-  title: "Randomizer"
+  title: 'Randomizer',
 }
 
 const Action = (props) => {
   return (
     <div>
-      <button
-        onClick={props.handleRandomItem}
-        disabled={!props.hasOptions}
-      >
+      <button onClick={props.handleRandomItem} disabled={!props.hasOptions}>
         What should I do?
       </button>
     </div>
@@ -117,13 +108,7 @@ class AddItem extends React.Component {
     event.preventDefault() //prevent full page refresh
     const option = event.target.elements.option.value.trim()
     const errorMessage = this.props.handleAddItem(option)
-
-    this.setState(() => {
-      return {
-        error: errorMessage,
-      }
-    })
-
+    this.setState(() => ({ error: errorMessage }))
     event.target.elements.option.value = ''
   }
 

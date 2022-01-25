@@ -109,7 +109,7 @@ var Header = function Header(props) {
 };
 
 Header.defaultProps = {
-  title: "Randomizer"
+  title: 'Randomizer'
 };
 
 var Action = function Action(props) {
