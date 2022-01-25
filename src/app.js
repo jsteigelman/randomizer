@@ -1,7 +1,8 @@
 class RandomizerApp extends React.Component {
   constructor(props) {
     super(props)
-    this.handleDeleteItems = this.handleDeleteItems.bind(this)
+    this.handleDeleteItemList = this.handleDeleteItemList.bind(this)
+    this.handleDeleteItem = this.handleDeleteItem.bind(this)
     this.handleRandomItem = this.handleRandomItem.bind(this)
     this.handleAddItem = this.handleAddItem.bind(this)
     this.state = {
@@ -9,8 +10,13 @@ class RandomizerApp extends React.Component {
     }
   }
 
-  handleDeleteItems() {
+  handleDeleteItemList() {
     this.setState(() => ({ options: [] }))
+  }
+
+  handleDeleteItem(item) {
+    console.log('hdp', item)
+    this.setState((prevState) => ({ options: prevState.options.filter((option) => option !== item) }))
   }
 
   handleRandomItem() {
@@ -46,7 +52,8 @@ class RandomizerApp extends React.Component {
         />
         <ItemList
           options={this.state.options}
-          handleDeleteItems={this.handleDeleteItems}
+          handleDeleteItemList={this.handleDeleteItemList}
+          handleDeleteItem={this.handleDeleteItem}
         />
         <AddItem handleAddItem={this.handleAddItem} />
       </div>
@@ -85,15 +92,30 @@ const ItemList = (props) => {
   return (
     <div>
       {props.options.map((option) => (
-        <Item key={option} optionText={option} />
+        <Item
+          key={option}
+          itemText={option}
+          handleDeleteItem={props.handleDeleteItem}
+        />
       ))}
-      <button onClick={props.handleDeleteItems}>Remove All</button>
+      <button onClick={props.handleDeleteItemList}>Remove All</button>
     </div>
   )
 }
 
 const Item = (props) => {
-  return <div>{props.optionText}</div>
+  return (
+    <div>
+      {props.itemText}
+      <button
+        onClick={(event) => {
+          props.handleDeleteItem(props.itemText)
+        }}
+      >
+        Delete
+      </button>
+    </div>
+  )
 }
 
 class AddItem extends React.Component {

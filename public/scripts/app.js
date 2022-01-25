@@ -35,7 +35,8 @@ var RandomizerApp = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, RandomizerApp);
 
     _this = _super.call(this, props);
-    _this.handleDeleteItems = _this.handleDeleteItems.bind(_assertThisInitialized(_this));
+    _this.handleDeleteItemList = _this.handleDeleteItemList.bind(_assertThisInitialized(_this));
+    _this.handleDeleteItem = _this.handleDeleteItem.bind(_assertThisInitialized(_this));
     _this.handleRandomItem = _this.handleRandomItem.bind(_assertThisInitialized(_this));
     _this.handleAddItem = _this.handleAddItem.bind(_assertThisInitialized(_this));
     _this.state = {
@@ -45,11 +46,23 @@ var RandomizerApp = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(RandomizerApp, [{
-    key: "handleDeleteItems",
-    value: function handleDeleteItems() {
+    key: "handleDeleteItemList",
+    value: function handleDeleteItemList() {
       this.setState(function () {
         return {
           options: []
+        };
+      });
+    }
+  }, {
+    key: "handleDeleteItem",
+    value: function handleDeleteItem(item) {
+      console.log('hdp', item);
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (option) {
+            return option !== item;
+          })
         };
       });
     }
@@ -90,7 +103,8 @@ var RandomizerApp = /*#__PURE__*/function (_React$Component) {
         handleRandomItem: this.handleRandomItem
       }), /*#__PURE__*/React.createElement(ItemList, {
         options: this.state.options,
-        handleDeleteItems: this.handleDeleteItems
+        handleDeleteItemList: this.handleDeleteItemList,
+        handleDeleteItem: this.handleDeleteItem
       }), /*#__PURE__*/React.createElement(AddItem, {
         handleAddItem: this.handleAddItem
       }));
@@ -123,15 +137,20 @@ var ItemList = function ItemList(props) {
   return /*#__PURE__*/React.createElement("div", null, props.options.map(function (option) {
     return /*#__PURE__*/React.createElement(Item, {
       key: option,
-      optionText: option
+      itemText: option,
+      handleDeleteItem: props.handleDeleteItem
     });
   }), /*#__PURE__*/React.createElement("button", {
-    onClick: props.handleDeleteItems
+    onClick: props.handleDeleteItemList
   }, "Remove All"));
 };
 
 var Item = function Item(props) {
-  return /*#__PURE__*/React.createElement("div", null, props.optionText);
+  return /*#__PURE__*/React.createElement("div", null, props.itemText, /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick(event) {
+      props.handleDeleteItem(props.itemText);
+    }
+  }, "Delete"));
 };
 
 var AddItem = /*#__PURE__*/function (_React$Component2) {
