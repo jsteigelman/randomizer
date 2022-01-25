@@ -2,6 +2,8 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -27,139 +29,168 @@ var RandomizerApp = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(RandomizerApp);
 
-  function RandomizerApp() {
+  function RandomizerApp(props) {
+    var _this;
+
     _classCallCheck(this, RandomizerApp);
 
-    return _super.apply(this, arguments);
+    _this = _super.call(this, props);
+    _this.handleDeleteItems = _this.handleDeleteItems.bind(_assertThisInitialized(_this));
+    _this.handleRandomItem = _this.handleRandomItem.bind(_assertThisInitialized(_this));
+    _this.handleAddItem = _this.handleAddItem.bind(_assertThisInitialized(_this));
+    _this.state = {
+      options: props.options
+    };
+    return _this;
   }
 
   _createClass(RandomizerApp, [{
+    key: "handleDeleteItems",
+    value: function handleDeleteItems() {
+      this.setState(function () {
+        return {
+          options: []
+        };
+      });
+    }
+  }, {
+    key: "handleRandomItem",
+    value: function handleRandomItem() {
+      var randomNum = Math.floor(Math.random() * this.state.options.length);
+      var randomOption = this.state.options[randomNum];
+      alert(randomOption);
+    }
+  }, {
+    key: "handleAddItem",
+    value: function handleAddItem(item) {
+      if (!item) {
+        // no input provided
+        return 'Please enter valid input (at least one character).';
+      } else if (this.state.options.indexOf(item) > -1) {
+        // duplicate value provided
+        return 'Please enter a unique value (this is a duplicate entry).';
+      }
+
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.concat(item) // concat instead of push, because don't want to change original array
+
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var title = 'Randomizer';
       var subtitle = 'Subtitle here';
-      var options = ['option 1', 'option2', 'option3', 'option4'];
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
-        title: title,
         subtitle: subtitle
-      }), /*#__PURE__*/React.createElement(Action, null), /*#__PURE__*/React.createElement(Options, {
-        options: options
-      }), /*#__PURE__*/React.createElement(AddOption, null));
+      }), /*#__PURE__*/React.createElement(Action, {
+        hasOptions: this.state.options.length > 1,
+        handleRandomItem: this.handleRandomItem
+      }), /*#__PURE__*/React.createElement(ItemList, {
+        options: this.state.options,
+        handleDeleteItems: this.handleDeleteItems
+      }), /*#__PURE__*/React.createElement(AddItem, {
+        handleAddItem: this.handleAddItem
+      }));
     }
   }]);
 
   return RandomizerApp;
 }(React.Component);
 
-var Header = /*#__PURE__*/function (_React$Component2) {
-  _inherits(Header, _React$Component2);
+RandomizerApp.defaultProps = {
+  options: []
+};
 
-  var _super2 = _createSuper(Header);
+var Header = function Header(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, props.title), props.subtitle && /*#__PURE__*/React.createElement("h2", null, props.subtitle));
+};
 
-  function Header() {
-    _classCallCheck(this, Header);
+Header.defaultProps = {
+  title: "Randomizer"
+};
 
-    return _super2.apply(this, arguments);
+var Action = function Action(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+    onClick: props.handleRandomItem,
+    disabled: !props.hasOptions
+  }, "What should I do?"));
+};
+
+var ItemList = function ItemList(props) {
+  return /*#__PURE__*/React.createElement("div", null, props.options.map(function (option) {
+    return /*#__PURE__*/React.createElement(Item, {
+      key: option,
+      optionText: option
+    });
+  }), /*#__PURE__*/React.createElement("button", {
+    onClick: props.handleDeleteItems
+  }, "Remove All"));
+};
+
+var Item = function Item(props) {
+  return /*#__PURE__*/React.createElement("div", null, props.optionText);
+};
+
+var AddItem = /*#__PURE__*/function (_React$Component2) {
+  _inherits(AddItem, _React$Component2);
+
+  var _super2 = _createSuper(AddItem);
+
+  function AddItem(props) {
+    var _this2;
+
+    _classCallCheck(this, AddItem);
+
+    _this2 = _super2.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this2), "handleAddItem", function (event) {
+      event.preventDefault(); //prevent full page refresh
+
+      var option = event.target.elements.option.value.trim();
+
+      var errorMessage = _this2.props.handleAddItem(option);
+
+      _this2.setState(function () {
+        return {
+          error: errorMessage
+        };
+      });
+
+      event.target.elements.option.value = '';
+    });
+
+    _this2.handleAddItem = _this2.handleAddItem.bind(_assertThisInitialized(_this2));
+    _this2.state = {
+      error: undefined
+    };
+    return _this2;
   }
 
-  _createClass(Header, [{
+  _createClass(AddItem, [{
     key: "render",
     value: function render() {
-      console.log(this.props);
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, this.props.title), /*#__PURE__*/React.createElement("h2", null, this.props.subtitle));
+      return /*#__PURE__*/React.createElement("div", null, this.state.error && /*#__PURE__*/React.createElement("p", null, this.state.error), /*#__PURE__*/React.createElement("form", {
+        onSubmit: this.handleAddItem
+      }, /*#__PURE__*/React.createElement("input", {
+        type: "text",
+        name: "option",
+        autoComplete: "off"
+      }), /*#__PURE__*/React.createElement("button", null, "Add Option")));
     }
   }]);
 
-  return Header;
-}(React.Component);
+  return AddItem;
+}(React.Component); // const User = (props) => {
+//   return (
+//     <div>
+//       <p>Name: {props.name}</p>
+//       <p>Age: {props.age}</p>
+//     </div>
+//   )
+// }
 
-var Action = /*#__PURE__*/function (_React$Component3) {
-  _inherits(Action, _React$Component3);
-
-  var _super3 = _createSuper(Action);
-
-  function Action() {
-    _classCallCheck(this, Action);
-
-    return _super3.apply(this, arguments);
-  }
-
-  _createClass(Action, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", null, "What should I do?"));
-    }
-  }]);
-
-  return Action;
-}(React.Component);
-
-var Options = /*#__PURE__*/function (_React$Component4) {
-  _inherits(Options, _React$Component4);
-
-  var _super4 = _createSuper(Options);
-
-  function Options() {
-    _classCallCheck(this, Options);
-
-    return _super4.apply(this, arguments);
-  }
-
-  _createClass(Options, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, this.props.options.map(function (option) {
-        return /*#__PURE__*/React.createElement(Option, {
-          key: option,
-          optionText: option
-        });
-      }));
-    }
-  }]);
-
-  return Options;
-}(React.Component);
-
-var Option = /*#__PURE__*/function (_React$Component5) {
-  _inherits(Option, _React$Component5);
-
-  var _super5 = _createSuper(Option);
-
-  function Option() {
-    _classCallCheck(this, Option);
-
-    return _super5.apply(this, arguments);
-  }
-
-  _createClass(Option, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, this.props.optionText);
-    }
-  }]);
-
-  return Option;
-}(React.Component);
-
-var AddOption = /*#__PURE__*/function (_React$Component6) {
-  _inherits(AddOption, _React$Component6);
-
-  var _super6 = _createSuper(AddOption);
-
-  function AddOption() {
-    _classCallCheck(this, AddOption);
-
-    return _super6.apply(this, arguments);
-  }
-
-  _createClass(AddOption, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", null, "Add option here"));
-    }
-  }]);
-
-  return AddOption;
-}(React.Component);
 
 ReactDOM.render( /*#__PURE__*/React.createElement(RandomizerApp, null), document.getElementById('app'));
