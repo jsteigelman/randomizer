@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import RandomizerApp from './components/RandomizerApp'
 
-
-const template = <p>Testing</p>
-ReactDOM.render(template, document.getElementById('app'))
+   
+  ReactDOM.render(<RandomizerApp />, document.getElementById('app'))
+  
