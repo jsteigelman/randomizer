@@ -3,5 +3,5 @@ import ReactDOM from 'react-dom'
 import RandomizerApp from './components/RandomizerApp'
 
    
-  ReactDOM.render(<RandomizerApp />, document.getElementById('app'))
+ReactDOM.render(<RandomizerApp />, document.getElementById('app'))
   
