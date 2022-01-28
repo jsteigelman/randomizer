@@ -3,17 +3,48 @@ import AddItem from './AddItem'
 import Action from './Action'
 import ItemList from './ItemList'
 import Header from './Header'
+import ItemModal from './ItemModal'
 
 export default class RandomizerApp extends React.Component {
-  constructor(props) {
-    super(props)
-    this.handleDeleteItemList = this.handleDeleteItemList.bind(this)
-    this.handleDeleteItem = this.handleDeleteItem.bind(this)
-    this.handleRandomItem = this.handleRandomItem.bind(this)
-    this.handleAddItem = this.handleAddItem.bind(this)
-    this.state = {
-      options: [],
+  state = {
+    options: [],
+    selectedItem: undefined
+  }
+
+  closeModal = () => {
+    this.setState(() => ({ selectedItem: undefined })) // parentheses implicitly return jsx (no need to use 'return') 
+}
+  
+  handleDeleteItemList = () => {
+    this.setState(() => ({ options: [] })) // parentheses implicitly return jsx (no need to use 'return') 
+  }
+
+  handleDeleteItem = (item) => {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => option !== item),
+    }))
+  }
+
+  handleRandomItem = () => {
+    const randomNum = Math.floor(Math.random() * this.state.options.length)
+    const randomOption = this.state.options[randomNum]
+    this.setState(() => {
+      return { selectedItem: randomOption }
+    })
+  }
+
+  handleAddItem = (item) => {
+    if (!item) {
+      // no input provided
+      return 'Please enter valid input (at least one character).'
+    } else if (this.state.options.indexOf(item) > -1) {
+      // duplicate value provided
+      return 'Please enter a unique value (this is a duplicate entry).'
     }
+
+    this.setState((prevState) => ({
+      options: prevState.options.concat(item), // concat instead of push, because don't want to change original array
+    }))
   }
 
   componentDidMount() {
@@ -43,37 +74,6 @@ export default class RandomizerApp extends React.Component {
     console.log('comp will unmount')
   }
 
-  handleDeleteItemList() {
-    this.setState(() => ({ options: [] }))
-  }
-
-  handleDeleteItem(item) {
-    console.log('hdp', item)
-    this.setState((prevState) => ({
-      options: prevState.options.filter((option) => option !== item),
-    }))
-  }
-
-  handleRandomItem() {
-    const randomNum = Math.floor(Math.random() * this.state.options.length)
-    const randomOption = this.state.options[randomNum]
-    alert(randomOption)
-  }
-
-  handleAddItem(item) {
-    if (!item) {
-      // no input provided
-      return 'Please enter valid input (at least one character).'
-    } else if (this.state.options.indexOf(item) > -1) {
-      // duplicate value provided
-      return 'Please enter a unique value (this is a duplicate entry).'
-    }
-
-    this.setState((prevState) => ({
-      options: prevState.options.concat(item), // concat instead of push, because don't want to change original array
-    }))
-  }
-
   render() {
     const title = 'Randomizer'
     const subtitle = 'Subtitle here'
@@ -91,6 +91,10 @@ export default class RandomizerApp extends React.Component {
           handleDeleteItem={this.handleDeleteItem}
         />
         <AddItem handleAddItem={this.handleAddItem} />
+        <ItemModal 
+          selectedItem={this.state.selectedItem}
+          closeModal={this.closeModal}
+        />
       </div>
     )
   }
