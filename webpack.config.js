@@ -9,9 +9,22 @@ module.exports = {
     mode: process.env.NODE_ENV || 'development',
     module: {
         rules: [{
-            loader: 'babel-loader',
             test: /\.js$/,
-            exclude: /node_modules/
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env', '@babel/preset-react'],
+                    plugins: ['@babel/plugin-proposal-class-properties']
+                }
+            }
+        }, {
+            test: /\.scss$/,
+            use: [
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+            ]
         }]
     },
     devtool: 'eval-cheap-module-source-map',
