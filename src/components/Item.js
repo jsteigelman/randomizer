@@ -2,9 +2,9 @@ import React from 'react'
 
 const handleTextColor = (count) => {
   if (count % 2 === 0) {
-    return 'item__text-dark'
+    return 'item__text item__text-dark'
   } else {
-    return 'item__text-light'
+    return 'item__text item__text-light'
   }
 }
 

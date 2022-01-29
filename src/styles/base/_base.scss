@@ -13,10 +13,11 @@ button {
     cursor: pointer;
     text-transform: uppercase;
     border: 1px solid black;
+    color: red;
 }
 
 button:disabled {
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .topContainer {

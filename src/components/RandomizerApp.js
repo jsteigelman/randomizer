@@ -86,6 +86,7 @@ export default class RandomizerApp extends React.Component {
         <div className="container">
           <Action
           hasOptions={this.state.options.length > 1}
+          hasOptionsToDelete={this.state.options.length > 0}
           handleDeleteItemList={this.handleDeleteItemList}
           handleRandomItem={this.handleRandomItem}
           />
