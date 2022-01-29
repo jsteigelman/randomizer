@@ -1,20 +1,20 @@
 // widget header
 .widget {
-    margin-bottom: $l-padding;
+    margin-bottom: $s-padding;
 }
 
 .widget__start-message {
     color: black;
     background-color: springgreen;
     text-align: center;
-    font-size: $m-font-size;
-    font-weight: 600;
-    padding: 1rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 0.2rem;
 }
 
 .widget-header {
     color: $dark-gray;
-    padding: $s-padding 0;
+    margin-bottom: $s-padding;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,4 +22,6 @@
 
 .widget-header__title {
     margin: 0;
+    color: $black;
+    font-size: 2.4rem;
 }

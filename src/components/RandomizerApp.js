@@ -76,7 +76,7 @@ export default class RandomizerApp extends React.Component {
 
   render() {
     const title = 'Randomizer'
-    const subtitle = 'Feeling indecisive? Let Randomizer make the decision for you.'
+    const subtitle = 'Unable to choose between options? Let Randomizer make the decision for you.'
 
     return (
       <div>
@@ -86,6 +86,7 @@ export default class RandomizerApp extends React.Component {
         <div className="container">
           <Action
           hasOptions={this.state.options.length > 1}
+          handleDeleteItemList={this.handleDeleteItemList}
           handleRandomItem={this.handleRandomItem}
           />
           <div className="widget">
