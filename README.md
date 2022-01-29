@@ -1,14 +1,15 @@
 # Randomizer
 
 ## Description
+Randomizer is a React application that allows users to enter a list of choices and pick one at random.
 
 ## Live Site URL
 [https://steigelman-randomizer.netlify.app/](https://steigelman-randomizer.netlify.app/)
 
 ## Functionality
-* User can create an item 
-* User can delete an item 
-* User can remove all items by clicking "Delete All"
+* User can create an item by using input text field
+* User can delete an item by clicking "Delete" button
+* User can remove all items at once by clicking "Delete All"
 * User can generate a random item by clicking "What Should I Do?"
 
 ## Built With
