@@ -1,5 +1,8 @@
-$brand-color: magenta;
-
-* {
-    color: $brand-color;
-}
+@import './base/settings';
+@import './base/base';
+@import './components/add-item';
+@import './components/button';
+@import './components/container';
+@import './components/header';
+@import './components/item';
+@import './components/widget';

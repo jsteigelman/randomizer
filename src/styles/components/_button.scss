@@ -1,0 +1,29 @@
+.large-button {
+    background-color: black;
+    color: white;
+    padding: $buttons-padding;
+    text-transform: uppercase;
+    border: none;
+}
+
+.large-button:disabled {
+    // opacity: 0.5;
+}
+
+.medium-button {
+    background-color: transparent;
+    color: black;
+    padding: $buttons-padding;
+}
+
+.small-button {
+    background-color: transparent;
+    color: $dark-gray;
+    border: none;
+    font-weight: 500;
+}
+
+.button--link {
+    background: none;
+    border: none;
+}

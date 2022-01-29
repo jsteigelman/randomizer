@@ -1,0 +1,17 @@
+.header {
+    margin-bottom: 4.8rem;
+    padding: $l-padding 0 0;
+}
+
+// BEM naming convention (block element modifier)
+.header__title {
+    font-size: $xxl-font-size;
+    margin: 0;
+}
+
+.header__subtitle {
+    font-size: $m-font-size;
+    font-weight: 600;
+    margin: 0;
+}
+

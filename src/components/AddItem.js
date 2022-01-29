@@ -19,10 +19,10 @@ export default class AddItem extends React.Component {
   render() {
     return (
       <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.handleAddItem}>
-          <input type='text' name='option' autoComplete='off' />
-          <button>Add Option</button>
+        {this.state.error && <p className="add-item-error">{this.state.error}</p>}
+        <form className="add-item" onSubmit={this.handleAddItem}>
+          <input className="add-item__input" type='text' name='option' autoComplete='off' />
+          <button className="medium-button">Add Option</button>
         </form>
       </div>
     )

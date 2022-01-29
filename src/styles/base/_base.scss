@@ -1,0 +1,36 @@
+html {
+    font-size: 62.5%;  // set rem in a base 10 system (1rem = 10px)
+    background-color: $light-gray;
+    font-color: $black;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+}
+
+button {
+    cursor: pointer;
+    text-transform: uppercase;
+    border: 1px solid black;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.topContainer {
+    width: calc(100% - 40px);
+    height: $block-size;
+    border: $block-style;
+    margin: $block-margin;
+    position: absolute;
+}
+
+.leftContainer {
+    width: $block-size;
+    height: calc(100% - 40px);
+    border: $block-style;
+    margin: $block-margin;
+    position: absolute;
+}

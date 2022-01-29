@@ -1,0 +1,20 @@
+.add-item-error {
+    color: blue;
+    font-style: italic;
+    padding: $s-padding 0;
+    text-align: center;
+}
+
+.add-item {
+    display: flex;
+}
+
+.add-item__input {
+    margin-right: 10px;
+    flex-grow: 1;
+    padding: $buttons-padding;
+}
+
+.add-item__input:focus {
+    outline: none;
+}
