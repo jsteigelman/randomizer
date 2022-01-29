@@ -28,10 +28,21 @@ button:disabled {
     position: absolute;
 }
 
-.leftContainer {
+.leftContainerOne {
     width: $block-size;
-    height: calc(100% - 40px);
+    height: calc(100vh - 40px);
     border: $block-style;
     margin: $block-margin;
     position: absolute;
+    border-bottom: 0;
+
+}
+
+.leftContainerTwo {
+    width: $block-size;
+    height: calc(100vh - 40px);
+    border: $block-style;
+    margin: $block-margin;
+    position: fixed;
+    border-top: 0;
 }

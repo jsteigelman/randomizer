@@ -81,7 +81,8 @@ export default class RandomizerApp extends React.Component {
     return (
       <div>
         <div className="topContainer"></div>
-        <div className="leftContainer"></div>
+        <div className="leftContainerOne"></div>
+        <div className="leftContainerTwo"></div>
         <Header subtitle={subtitle} />
         <div className="container">
           <Action
