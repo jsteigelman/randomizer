@@ -3,7 +3,6 @@
 ## Description
 
 ## Live Site URL
-This app is deployed to Heroku: 
 [https://steigelman-randomizer.netlify.app/](https://steigelman-randomizer.netlify.app/)
 
 ## Functionality
