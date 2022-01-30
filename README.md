@@ -1,7 +1,7 @@
 # Randomizer
 
 ## Description
-This is a decision-making app built with React. The user can input a list of items and have the computer choose one at random.  
+Randomizer is a React app for random decision-making. Users input a list of entries (or “choices”) and Randomizer chooses one at random.
 
 ## Live Site URL
 [https://steigelman-randomizer.netlify.app/](https://steigelman-randomizer.netlify.app/)
