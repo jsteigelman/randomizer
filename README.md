@@ -1,7 +1,7 @@
 # Randomizer
 
 ## Description
-This is a decision-making app that I built using React. Users can input a list of items and have the computer choose one at random. 
+This is a decision-making app built with React. The user can input a list of items and have the computer choose one at random.  
 
 ## Live Site URL
 [https://steigelman-randomizer.netlify.app/](https://steigelman-randomizer.netlify.app/)
@@ -17,6 +17,7 @@ This is a decision-making app that I built using React. Users can input a list o
 * [Webpack](https://www.npmjs.com/package/webpack) - module bundler of JavaScript files for usage in a browser
 * [Babel](https://www.npmjs.com/package/@babel/core) - JavaScript compiler
 * [Sass](https://www.npmjs.com/package/sass-loader) - preprocessor scripting language that is interpreted or compiled into CSS
+* [Normalize.css](https://www.npmjs.com/package/normalize.css?activeTab=versions) - CSS file that provides better cross-browser consistency in the default styling of HTML elements
 
 ## Randomizer Preview
 <img src="/public/img/randomizer-preview.png" alt="chat app" width="840"/>
